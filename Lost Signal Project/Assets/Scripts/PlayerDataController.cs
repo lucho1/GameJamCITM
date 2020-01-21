@@ -90,12 +90,18 @@ public class PlayerDataController : MonoBehaviour
             current_node.position = gameObject.transform.position;
             current_node.rotation = gameObject.transform.rotation;
 
+            //public static Object Instantiate(Object original, Vector3 position, Quaternion rotation);
+
+           
+
             current_node.time = Time.time - start_time;
 
             saved_data_temp.AddNodeToPath(current_node);
 
             //yield on a new YieldInstruction that waits for 5 seconds.
             yield return new WaitForSeconds(save_frequency);
+
+           
 
             saved_data_temp.AddNodeToPath(current_node);
 
