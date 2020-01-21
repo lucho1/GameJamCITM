@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed = 10.0f;
-    public float rotationSpeed = 100.0f;
+    public float maxMovementSpeed = 10.0f;
+    public float maxRotationSpeed = 100.0f;
+
+    [Range(0.0f,1.0f)]public float movementAcceleration=0.10f;
+    [Range(0.0f, 1.0f)]public float rotationAcceleration=0.1f;
+
+    private Vector3 currMovementSpeed;
+    private float currRotationSpeed=0.0f;
 
     public int controllerNumber;
 
@@ -19,33 +25,41 @@ public class PlayerMovement : MonoBehaviour
 
         rightInputX = "RightStickVertical" + controllerNumber.ToString();
         rightInputY = "RightStickHorizontal" + controllerNumber.ToString();
+
+        currMovementSpeed = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     void Update()
     {
-        //Position 
-        Vector3 translation = new Vector3(Input.GetAxis(leftInputX) * movementSpeed, 0,Input.GetAxis(leftInputY) * movementSpeed);
-        translation *= Time.deltaTime;
-
-        transform.position += translation;
+        //Calculate new position 
+        Vector3 desiredSpeed = new Vector3(Input.GetAxis(leftInputX) * maxMovementSpeed, 0,Input.GetAxis(leftInputY) * maxMovementSpeed);
+        currMovementSpeed += (desiredSpeed - currMovementSpeed) * movementAcceleration;
 
         float inputX = Input.GetAxis(rightInputX);
         float inputY = Input.GetAxis(rightInputY);
+        
+        //Update rotations
+        if (inputY != 0 && inputX != 0)
+        {
+            //Angle we want
+            float finalAngle = Mathf.Atan(inputY / inputX);
 
-        if (inputY == 0 && inputX == 0)
-            return;
+            //Adjust angle depending on its quadrant
+            if (inputX < 0 || inputY < 0)
+                finalAngle += Mathf.PI;
 
-        float finalAngle = Mathf.Atan(inputY/inputX);
+            if (inputX >= 0 && inputY < 0)
+                finalAngle += Mathf.PI;
 
-        //Adjust angle depending on its quadrant
-        if (inputX < 0 || inputY < 0)
-            finalAngle += Mathf.PI;
+            float currentAngle = transform.rotation.y;
 
-        if (inputX >= 0 && inputY < 0)
-            finalAngle += Mathf.PI;
+            float newAngle = currentAngle + (currRotationSpeed * Time.deltaTime);
 
-        //Update position & 
-        if (finalAngle !=0 )
-            transform.rotation = Quaternion.Euler(0, -finalAngle*180/Mathf.PI, 0);
+            //Update position &
+            transform.rotation = Quaternion.Euler(0, -finalAngle * 180 / Mathf.PI, 0);
+        }
+
+        transform.position += currMovementSpeed*Time.deltaTime;
     }
+    
 }
