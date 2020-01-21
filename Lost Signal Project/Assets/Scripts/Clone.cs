@@ -5,10 +5,13 @@ using System.Collections;
 
 public class Clone : MonoBehaviour
 {
-    PlayerDataController player_data;
 
     PathNode goal;
     GameManager gm;
+
+    public CloneData data;
+
+    bool first_update = true;
 
     private float startTime;
 
@@ -17,16 +20,16 @@ public class Clone : MonoBehaviour
     {
         gm = FindObjectOfType<GameManager>();
 
-        player_data = gm.GetPlayerOne().GetComponent<PlayerDataController>();
         startTime = Time.time;
-        
+
     }
 
     // Update is called once per frame
     void Update()
-    {        
-        if (Input.GetKeyDown(KeyCode.G))
+    {   if (first_update)
         {
+            first_update = false;
+
             StartCoroutine(GoToGoal());
         }
     }
@@ -41,26 +44,24 @@ public class Clone : MonoBehaviour
         while (true)
         {
             //Print the time of when the function is first called.
-           // Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+            //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+            Vector3 lastNode = data.GetNode(next_goal_index).position;
+            Vector3 nextNode = data.GetNode(next_goal_index + 1).position;
+            Vector3 nextNode2 = data.GetNode(next_goal_index + 2).position;
+
+
+            //float fracComplete = (Time.time - startTime) / 1;
+
+            gameObject.transform.position = lastNode; //Vector3.Slerp(lastNode, nextNode, fracComplete);
+
+            next_goal_index++;
 
             //yield on a new YieldInstruction that waits for 5 seconds.
-            yield return new WaitForSeconds(player_data.save_frequency);
-            //PathNode node = player_data.saved_data_temp.GetNode(0);
-            Vector3 lastNode = player_data.saved_data_temp.GetNode(next_goal_index).position;
-            Vector3 nextNode = player_data.saved_data_temp.GetNode(next_goal_index).position; ;
-            if (player_data.saved_data_temp.GetNode(next_goal_index+1).position!=null)
-                nextNode = player_data.saved_data_temp.GetNode(next_goal_index+1).position;
 
-
-            float fracComplete = (Time.time - startTime) / 1;
-
-            gameObject.transform.position = Vector3.Slerp(lastNode, nextNode, fracComplete);
-
-
-            //gameObject.transform.position = player_data.saved_data_temp.GetNode(next_goal_index).position;
-            next_goal_index++;
-           
-
+            
+            yield return new WaitForSeconds(1);  //Should be equal to player safe frequency
 
         }
     }

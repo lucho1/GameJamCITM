@@ -12,7 +12,9 @@ public struct PathNode
 
 public class CloneData
 {
-    List<PathNode> path;
+    public List<PathNode> path;
+
+    public int round_to_reproduce;
 
     public CloneData()
     {
@@ -26,10 +28,19 @@ public class CloneData
 
     public PathNode GetNode(int i)
     {
-        return path[i];
+        if (i < path.Count)
+            return path[i];
+        else
+        {
+            Debug.LogError("Estas intentant agafar un nodo amb index fora del path");
+            return new PathNode();
+        }
     }
 
-    
+    public void ResetPathList()
+    {
+        path.Clear();
+    }
 }
 
 public class PlayerDataController : MonoBehaviour
@@ -38,24 +49,24 @@ public class PlayerDataController : MonoBehaviour
 
     public CloneData saved_data_temp;
 
-    public bool die_now = false;
+
+    RoundManager rm;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(UpdateSavedDataPath());
         saved_data_temp = new CloneData();
+
+        rm = FindObjectOfType<RoundManager>();
+        rm.OnRoundEndEvent.AddListener(OnRoundEnd);
+        rm.OnRoundStartEvent.AddListener(OnRoundStart);
+
+        StartCoroutine(UpdateSavedDataPath());
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (die_now)
-        {
-            StopCoroutine(UpdateSavedDataPath());
-            die_now = false;
-        }
         
     }
 
@@ -64,25 +75,48 @@ public class PlayerDataController : MonoBehaviour
         float start_time = Time.time;
         while (true)
         {
-            //Print the time of when the function is first called.
-            //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+           // Print the time of when the function is first called.
+
+            Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        
+           
+
+            PathNode current_node = new PathNode();
+
+
+            //Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+
+            current_node.position = gameObject.transform.position;
+            current_node.rotation = gameObject.transform.rotation;
+
+            current_node.time = Time.time - start_time;
+
+            saved_data_temp.AddNodeToPath(current_node);
 
             //yield on a new YieldInstruction that waits for 5 seconds.
-           
-         yield return new WaitForSeconds(save_frequency);
- 
-         PathNode current_node = new PathNode();
+            yield return new WaitForSeconds(save_frequency);
 
-                    //Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+            saved_data_temp.AddNodeToPath(current_node);
 
-         current_node.position = gameObject.transform.position;
-         current_node.rotation = gameObject.transform.rotation;
 
-         current_node.time = Time.time - start_time;
-
-         saved_data_temp.AddNodeToPath(current_node);
-           
-            
         }
     }
+
+    void OnRoundEnd()
+    {
+
+    }
+
+    public CloneData GetCloneData()
+    {
+        saved_data_temp.round_to_reproduce = rm.GetCurrentRound();
+        return saved_data_temp;
+    }
+
+    void OnRoundStart()
+    {
+        saved_data_temp.ResetPathList();
+    }
+
 }

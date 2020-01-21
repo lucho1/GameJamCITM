@@ -14,8 +14,6 @@ public class CollisionDetecton : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("HIT");
-        gm.player_1.GetComponent<PlayerDataController>().die_now = true;
-        Destroy(collision.gameObject);
        
     }
 
