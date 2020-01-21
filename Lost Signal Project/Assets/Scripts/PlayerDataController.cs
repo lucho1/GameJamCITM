@@ -62,16 +62,16 @@ public class PlayerDataController : MonoBehaviour
         while (true)
         {
             //Print the time of when the function is first called.
-            //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+            Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
             //yield on a new YieldInstruction that waits for 5 seconds.
             yield return new WaitForSeconds(save_frequency);
 
             PathNode current_node = new PathNode();
 
-            Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+            //Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
 
-            current_node.position = pos;
+            current_node.position = gameObject.transform.position;
             current_node.rotation = gameObject.transform.rotation;
             
             current_node.time = Time.time - start_time;           
