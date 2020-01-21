@@ -11,18 +11,22 @@ public class WeaponController : MonoBehaviour
 {
     public GameObject bullet_prefav;
 
+    [Range (1,2)]public int controllerNumber;
+
+    private string fireButton;
+
     WeaponStats current_weapon_stats;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        fireButton = "FireButton" + controllerNumber.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown(fireButton))
         {
             Vector3 fire_position = transform.position;
             fire_position += transform.forward * 1;

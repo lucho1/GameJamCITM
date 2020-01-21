@@ -5,15 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float maxMovementSpeed = 10.0f;
-    public float maxRotationSpeed = 100.0f;
 
     [Range(0.0f,1.0f)]public float movementAcceleration=0.10f;
-    [Range(0.0f, 1.0f)]public float rotationAcceleration=0.1f;
 
     private Vector3 currMovementSpeed;
     private float currRotationSpeed=0.0f;
 
-    public int controllerNumber;
+    [Range(1, 2)] public int controllerNumber;
 
     private string leftInputX, leftInputY;
     private string rightInputX, rightInputY;
