@@ -65,11 +65,14 @@
     <Compile Include="Assets\BulletController.cs" />
     <Compile Include="Assets\ClonesController.cs" />
     <Compile Include="Assets\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\BulletController.cs" />
     <Compile Include="Assets\Scripts\Clone.cs" />
+    <Compile Include="Assets\Scripts\CollisionDetecton.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerDataController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\RoundManager.cs" />
+    <Compile Include="Assets\Scripts\WeaponController.cs" />
     <Compile Include="Assets\WeaponController.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/polff2/Documents/GitHub/GameJamCITM/Lost Signal Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
