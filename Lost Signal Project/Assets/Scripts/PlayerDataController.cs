@@ -10,19 +10,17 @@ public struct PathNode
     public float time;
 }
 
-public class CloneData
+public struct CloneData
 {
     public List<PathNode> path;
 
     public int round_to_reproduce;
 
-    public CloneData()
-    {
-        path = new List<PathNode>();
-    }
-
     public void AddNodeToPath(PathNode n)
     {
+        if (path == null)
+            path = new List<PathNode>();
+
         path.Add(n);
     }
 
@@ -40,6 +38,20 @@ public class CloneData
     public void ResetPathList()
     {
         path.Clear();
+    }
+
+    public CloneData GetCopy()
+    {
+        CloneData copy = new CloneData();
+        copy.path = new List<PathNode>();
+
+        foreach(PathNode node in path)
+        {
+            copy.path.Add(node);
+        }
+
+        copy.round_to_reproduce = round_to_reproduce;
+        return copy;
     }
 }
 
