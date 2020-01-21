@@ -17,6 +17,8 @@ public class WeaponController : MonoBehaviour
 
     WeaponStats current_weapon_stats;
 
+    public int layer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +28,13 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown(fireButton))
+        if (Input.GetAxis(fireButton)>0)
         {
             Vector3 fire_position = transform.position;
             fire_position += transform.forward * 1;
 
-            Instantiate(bullet_prefav, fire_position, transform.rotation);
+            GameObject newBullet = Instantiate(bullet_prefav, fire_position, transform.rotation);
+            newBullet.layer = layer;
         }
     }
 }
