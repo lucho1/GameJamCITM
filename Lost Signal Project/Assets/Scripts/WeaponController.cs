@@ -10,6 +10,8 @@ public struct WeaponStats
 public class WeaponController : MonoBehaviour
 {
     public GameObject bullet_prefav;
+    private Timer weaponShotTime;
+    public float fireRate = 1.0f;
 
     [Range (1,2)]public int controllerNumber;
 
@@ -23,13 +25,16 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         fireButton = "FireButton" + controllerNumber.ToString();
+        weaponShotTime = gameObject.GetComponent<Timer>();
+        weaponShotTime.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis(fireButton)>0)
+        if (Input.GetAxis(fireButton) > 0 && weaponShotTime.ReadTime() > fireRate)
         {
+            weaponShotTime.Start();
             Vector3 fire_position = transform.position;
             fire_position += transform.forward * 1;
 
