@@ -30,7 +30,7 @@ public class RoundManager : MonoBehaviour
     {
         GameManager gm = FindObjectOfType<GameManager>();
         current_lifetime = 0;
-        current_round = 1;
+        current_round = 0;
 
         if (OnRoundEndEvent == null)
             OnRoundEndEvent = new UnityEvent();

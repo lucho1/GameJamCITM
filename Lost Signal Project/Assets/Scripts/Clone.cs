@@ -13,6 +13,8 @@ public class Clone : MonoBehaviour
 
     bool first_update = true;
 
+    int next_goal_index = -1; //La corrutina comença sumant i aixi comença amb 0
+
     private float startTime;
 
     // Start is called before the first frame update
@@ -37,33 +39,38 @@ public class Clone : MonoBehaviour
     IEnumerator GoToGoal()
     {
         float start_time = Time.time;
-        int next_goal_index = 0;
 
-       
+
 
         while (true)
         {
             //Print the time of when the function is first called.
-
             //Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
-            Vector3 lastNode = data.GetNode(next_goal_index).position;
-            Vector3 nextNode = data.GetNode(next_goal_index + 1).position;
-            Vector3 nextNode2 = data.GetNode(next_goal_index + 2).position;
-
-
-            //float fracComplete = (Time.time - startTime) / 1;
-
-            gameObject.transform.position = lastNode; //Vector3.Slerp(lastNode, nextNode, fracComplete);
 
             next_goal_index++;
 
-            //yield on a new YieldInstruction that waits for 5 seconds.
+            Vector3 nextNode;
+
+            if (next_goal_index < data.path.Count)
+            {
+                nextNode = data.GetNode(next_goal_index).position;
+
+
+                //float fracComplete = (Time.time - startTime) / 1;
+
+                gameObject.transform.position = nextNode; //Vector3.Slerp(lastNode, nextNode, fracComplete);
+            }
+            else
+                break;
+
 
             
-            yield return new WaitForSeconds(1);  //Should be equal to player safe frequency
+            yield return new WaitForSeconds(0.1f);  //Should be equal to player safe frequency
 
         }
+
+        yield return null;
     }
 }
 
