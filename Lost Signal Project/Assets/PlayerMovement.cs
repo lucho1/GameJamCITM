@@ -7,28 +7,41 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed = 10.0f;
     public float rotationSpeed = 100.0f;
     
-    [Range (0,1.0f)]
-    public float joystickSensibility;
-    
-
-
     void Update()
     {
+        //Position 
         Vector3 translation = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, 0,Input.GetAxis("Vertical") * movementSpeed);
         translation *= Time.deltaTime;
+
         transform.position += translation;
 
-        if (Input.GetAxis("Fire1") > joystickSensibility || Input.GetAxis("Fire1") < -joystickSensibility)
-        {
-            Debug.Log(Input.GetAxis("Fire1"));
+        float inputY = Input.GetAxis("RightStickVertical");
+        float inputX = Input.GetAxis("RightStickHorizontal");
 
-            transform.rotation.SetEulerAngles(0.0f,0.0f,0.0f);
-           
-            //Vector3 rotation = new Vector3(0, Input.GetAxis("Fire1") * rotationSpeed,0);
+        if (inputY == 0 && inputX == 0)
+            return;
+
+        float finalAngle = Mathf.Atan(inputY/inputX);
 
 
-            //rotation *= Time.deltaTime;
-            //transform.Rotate(rotation);
-        }
+        //Adjust angle depending on its quadrant
+        if (inputX < 0 || inputY < 0)
+            finalAngle += Mathf.PI;
+
+        if (inputX >= 0 && inputY < 0)
+            finalAngle += Mathf.PI;
+        
+
+        Debug.Log(finalAngle * 180/Mathf.PI);
+
+
+        //Vector3 rotation = new Vector3(0, Input.GetAxis("Fire1") * rotationSpeed,0);
+
+        //rotation *= Time.deltaTime;
+        //transform.Rotate(rotation);
+
+        //Update position & 
+        if (finalAngle !=0 )
+            transform.rotation = Quaternion.Euler(0, -finalAngle*180/Mathf.PI, 0);
     }
 }
