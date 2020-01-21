@@ -42,6 +42,6 @@ public class PlayerMovement : MonoBehaviour
 
         //Update position & 
         if (finalAngle !=0 )
-            transform.rotation = Quaternion.Euler(0, -finalAngle*180/Mathf.PI, 0);
+            transform.rotation = Quaternion.Euler(0, finalAngle*180/Mathf.PI, 0);
     }
 }

@@ -49,10 +49,6 @@ public class PlayerDataController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            gameObject.transform.SetPositionAndRotation(gameObject.transform.position + new Vector3(0, 0, 1), gameObject.transform.rotation);
-        }
 
     }
 
