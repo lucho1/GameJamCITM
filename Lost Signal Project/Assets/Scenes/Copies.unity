@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d3fb310d2a5cc44bac28953b8cd8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_data: {fileID: 0}
 --- !u!65 &82153232
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -350,6 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81ab07ad6e04fe408e478d9fd42b47d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_1: {fileID: 2101007692}
+  player_2: {fileID: 0}
 --- !u!4 &1214704582
 Transform:
   m_ObjectHideFlags: 0
@@ -561,7 +562,7 @@ GameObject:
   - component: {fileID: 2101007694}
   - component: {fileID: 2101007693}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
