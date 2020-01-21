@@ -14,6 +14,8 @@ public class CloneData
 {
     List<PathNode> path;
 
+    public int round_to_reproduce;
+
     public CloneData()
     {
         path = new List<PathNode>();
@@ -26,10 +28,19 @@ public class CloneData
 
     public PathNode GetNode(int i)
     {
+        if (i < path.Count)
         return path[i];
+        else
+        {
+            Debug.LogError("Estas intentant agafar un nodo amb index fora del path");
+            return new PathNode();
+        }
     }
 
-    
+    public void ResetPathList()
+    {
+        path.Clear();
+    }
 }
 
 public class PlayerDataController : MonoBehaviour
@@ -38,12 +49,19 @@ public class PlayerDataController : MonoBehaviour
 
     public CloneData saved_data_temp;
 
+    RoundManager rm;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(UpdateSavedDataPath());
         saved_data_temp = new CloneData();
+
+        rm = FindObjectOfType<RoundManager>();
+        rm.OnRoundEndEvent.AddListener(OnRoundEnd);
+        rm.OnRoundStartEvent.AddListener(OnRoundStart);
+
+        //StartCoroutine(UpdateSavedDataPath());
     }
 
     // Update is called once per frame
@@ -58,10 +76,9 @@ public class PlayerDataController : MonoBehaviour
         while (true)
         {
             //Print the time of when the function is first called.
-            Debug.Log("Started Coroutine at timestamp : " + Time.time);
+            Debug.Log("Started Coroutine A at timestamp : " + Time.time);
 
-            //yield on a new YieldInstruction that waits for 5 seconds.
-            yield return new WaitForSeconds(save_frequency);
+
 
             PathNode current_node = new PathNode();
 
@@ -73,6 +90,26 @@ public class PlayerDataController : MonoBehaviour
             current_node.time = Time.time - start_time;           
 
             saved_data_temp.AddNodeToPath(current_node);
+
+            //yield on a new YieldInstruction that waits for 5 seconds.
+            yield return new WaitForSeconds(save_frequency);
         }
     }
+
+    void OnRoundEnd()
+    {
+
+    }
+
+    public CloneData GetCloneData()
+    {
+        saved_data_temp.round_to_reproduce = rm.GetCurrentRound();
+        return saved_data_temp;
+    }
+
+    void OnRoundStart()
+    {
+        saved_data_temp.ResetPathList();
+    }
+
 }
