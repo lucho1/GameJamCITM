@@ -4,44 +4,62 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float movementSpeed = 10.0f;
-    public float rotationSpeed = 100.0f;
-    
+    public float maxMovementSpeed = 10.0f;
+    public float maxRotationSpeed = 100.0f;
+
+    [Range(0.0f,1.0f)]public float movementAcceleration=0.10f;
+    [Range(0.0f, 1.0f)]public float rotationAcceleration=0.1f;
+
+    private Vector3 currMovementSpeed;
+    private float currRotationSpeed=0.0f;
+
+    public int controllerNumber;
+
+    private string leftInputX, leftInputY;
+    private string rightInputX, rightInputY;
+
+    void Start()
+    {
+        leftInputX = "LeftStickHorizontal"+ controllerNumber.ToString();
+        leftInputY = "LeftStickVertical" + controllerNumber.ToString();
+
+        rightInputX = "RightStickVertical" + controllerNumber.ToString();
+        rightInputY = "RightStickHorizontal" + controllerNumber.ToString();
+
+        currMovementSpeed = new Vector3(0.0f, 0.0f, 0.0f);
+    }
+
     void Update()
     {
-        //Position 
-        Vector3 translation = new Vector3(Input.GetAxis("Horizontal") * movementSpeed, 0,Input.GetAxis("Vertical") * movementSpeed);
-        translation *= Time.deltaTime;
+        //Calculate new position 
+        Vector3 desiredSpeed = new Vector3(Input.GetAxis(leftInputX) * maxMovementSpeed, 0,Input.GetAxis(leftInputY) * maxMovementSpeed);
+        currMovementSpeed += (desiredSpeed - currMovementSpeed) * movementAcceleration;
 
-        transform.position += translation;
-
-        float inputX = Input.GetAxis("RightStickVertical");
-        float inputY = Input.GetAxis("RightStickHorizontal");
-
-        if (inputY == 0 && inputX == 0)
-            return;
-
-        float finalAngle = Mathf.Atan(inputY/inputX);
-
-
-        //Adjust angle depending on its quadrant
-        if (inputX < 0 || inputY < 0)
-            finalAngle += Mathf.PI;
-
-        if (inputX >= 0 && inputY < 0)
-            finalAngle += Mathf.PI;
+        float inputX = Input.GetAxis(rightInputX);
+        float inputY = Input.GetAxis(rightInputY);
         
+        //Update rotations
+        if (inputY != 0 && inputX != 0)
+        {
+            //Angle we want
+            float finalAngle = Mathf.Atan(inputY / inputX);
 
-        //Debug.Log(finalAngle * 180/Mathf.PI);
+            //Adjust angle depending on its quadrant
+            if (inputX < 0 || inputY < 0)
+                finalAngle += Mathf.PI;
 
+            if (inputX >= 0 && inputY < 0)
+                finalAngle += Mathf.PI;
 
-        //Vector3 rotation = new Vector3(0, Input.GetAxis("Fire1") * rotationSpeed,0);
+            float currentAngle = transform.rotation.y;
 
-        //rotation *= Time.deltaTime;
-        //transform.Rotate(rotation);
+            float newAngle = currentAngle + (currRotationSpeed * Time.deltaTime);
 
-        //Update position & 
-        if (finalAngle !=0 )
-            transform.rotation = Quaternion.Euler(0, finalAngle*180/Mathf.PI, 0);
+            //Update position &
+            transform.rotation = Quaternion.Euler(0, -finalAngle * 180 / Mathf.PI, 0);
+        }
+
+        transform.position += currMovementSpeed*Time.deltaTime;
     }
+    
 }
