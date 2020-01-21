@@ -7,13 +7,15 @@ public class Clone : MonoBehaviour
     PlayerDataController player_data;
 
     PathNode goal;
-    
+    GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
-        GameManager gm = FindObjectOfType<GameManager>();
+        gm = FindObjectOfType<GameManager>();
 
         player_data = gm.GetPlayerOne().GetComponent<PlayerDataController>();
+        StartCoroutine(GoToGoal());
     }
 
     // Update is called once per frame
@@ -37,10 +39,18 @@ public class Clone : MonoBehaviour
         while (true)
         {
             //Print the time of when the function is first called.
-            //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+            Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
             //yield on a new YieldInstruction that waits for 5 seconds.
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
+            //PathNode node = player_data.saved_data_temp.GetNode(0);
+
+            gameObject.transform.position = player_data.saved_data_temp.GetNode(1).position;
+            //if (player_data.saved_data_temp.GetNode(next_goal_index).position != null)
+            //{
+            //    gameObject.transform.position = player_data.saved_data_temp.GetNode(next_goal_index).position;
+            //    next_goal_index++;
+            //}
 
             //Ves al goal
 

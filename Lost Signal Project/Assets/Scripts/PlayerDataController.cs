@@ -4,8 +4,9 @@ using UnityEngine;
 
 public struct PathNode
 {
-   
-    public Transform transform;
+
+    public Vector3 position;
+    public Quaternion rotation;
     public float time;
 }
 
@@ -48,7 +49,7 @@ public class PlayerDataController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             gameObject.transform.SetPositionAndRotation(gameObject.transform.position + new Vector3(0, 0, 1), gameObject.transform.rotation);
         }
@@ -66,11 +67,14 @@ public class PlayerDataController : MonoBehaviour
             //yield on a new YieldInstruction that waits for 5 seconds.
             yield return new WaitForSeconds(save_frequency);
 
-            PathNode current_node;
+            PathNode current_node = new PathNode();
 
-            current_node.transform = gameObject.transform;
-            current_node.time = Time.time - start_time;
-           
+            Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+
+            current_node.position = pos;
+            current_node.rotation = gameObject.transform.rotation;
+            
+            current_node.time = Time.time - start_time;           
 
             saved_data_temp.AddNodeToPath(current_node);
         }
