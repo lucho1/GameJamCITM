@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public struct WeaponStats
 {
     public float fire_rate;
@@ -40,7 +41,8 @@ public class WeaponController : MonoBehaviour
             Vector3 fire_position = transform.position;
             fire_position += transform.forward * 1;
 
-            Instantiate(bullet_prefav, fire_position, transform.rotation);
+            GameObject newBullet = Instantiate(bullet_prefav, fire_position, transform.rotation);
+            newBullet.layer = layerMask;
         }
     }
 }
