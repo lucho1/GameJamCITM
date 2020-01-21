@@ -44,6 +44,7 @@ public class ClonesController : MonoBehaviour
         }
     }
 
+
     void OnRoundStart() //Will be called for first time in the second round
     {
         foreach (CloneData clone_data in player_one_clones_data)
@@ -51,6 +52,8 @@ public class ClonesController : MonoBehaviour
             GameObject clone_go = Instantiate(player_one_clone_prefab, new Vector3(Random.Range(-15.0f, 15.0f), gm.GetPlayerOne().transform.position.y,0), Quaternion.identity);
             clone_go.GetComponent<Clone>().data = clone_data;
         }
+
+        Debug.Log(player_one_clones_data.Count);
     }
 
 }
