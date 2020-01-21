@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMovementSpeed: 10
   maxRotationSpeed: 100
-  movementAcceleration: 0.1
+  movementAcceleration: 0.73
   rotationAcceleration: 0.1
   controllerNumber: 2
 --- !u!54 &23003481
@@ -640,7 +640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMovementSpeed: 10
   maxRotationSpeed: 100
-  movementAcceleration: 0.1
+  movementAcceleration: 0.78
   rotationAcceleration: 0.1
   controllerNumber: 1
 --- !u!54 &1175822211
