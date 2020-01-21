@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position += translation;
 
-        float inputY = Input.GetAxis("RightStickVertical");
-        float inputX = Input.GetAxis("RightStickHorizontal");
+        float inputX = Input.GetAxis("RightStickVertical");
+        float inputY = Input.GetAxis("RightStickHorizontal");
 
         if (inputY == 0 && inputX == 0)
             return;
