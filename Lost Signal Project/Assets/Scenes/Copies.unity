@@ -379,6 +379,8 @@ MonoBehaviour:
   player_one_clone_prefab: {fileID: 1000017045228406440, guid: 3825972ca9e7dfb44a58f149a3b638e9,
     type: 3}
   player_two_clone_prefab: {fileID: 0}
+  DebugPathSphere: {fileID: 348212478557352427, guid: f30bd14a5f24e344784b239ef8591506,
+    type: 3}
 --- !u!1 &1364296895
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ public class ClonesController : MonoBehaviour
     public GameObject player_one_clone_prefab;
     public GameObject player_two_clone_prefab;
 
+    public GameObject DebugPathSphere;
+
     List<CloneData> player_one_clones_data;
     List<CloneData> player_two_clones_data;
 
@@ -51,7 +53,22 @@ public class ClonesController : MonoBehaviour
         {
             GameObject clone_go = Instantiate(player_one_clone_prefab, new Vector3(Random.Range(-15.0f, 15.0f), gm.GetPlayerOne().transform.position.y,0), Quaternion.identity);
             clone_go.GetComponent<Clone>().data = clone_data;
+
+            for(int i = 0;i< clone_data.path.Count; i++)
+            {
+                GameObject sphere = Instantiate(DebugPathSphere, clone_data.path[i].position, clone_data.path[i].rotation);
+               // sphere.transform.position = clone_data.path[i].position;
+            }
+            
+            
+
+           
+
+            
+           
+
         }
+
 
         Debug.Log(player_one_clones_data.Count);
     }
