@@ -12,7 +12,7 @@ public struct PathNode
 
 public class CloneData
 {
-    List<PathNode> path;
+    public List<PathNode> path;
 
     public int round_to_reproduce;
 
@@ -29,7 +29,7 @@ public class CloneData
     public PathNode GetNode(int i)
     {
         if (i < path.Count)
-        return path[i];
+            return path[i];
         else
         {
             Debug.LogError("Estas intentant agafar un nodo amb index fora del path");
@@ -61,7 +61,7 @@ public class PlayerDataController : MonoBehaviour
         rm.OnRoundEndEvent.AddListener(OnRoundEnd);
         rm.OnRoundStartEvent.AddListener(OnRoundStart);
 
-        //StartCoroutine(UpdateSavedDataPath());
+        StartCoroutine(UpdateSavedDataPath());
     }
 
     // Update is called once per frame
@@ -75,31 +75,30 @@ public class PlayerDataController : MonoBehaviour
         float start_time = Time.time;
         while (true)
         {
-            //Print the time of when the function is first called.
+           // Print the time of when the function is first called.
 
-            //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+            Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        
+           
+
+            PathNode current_node = new PathNode();
+
+
+            //Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+
+            current_node.position = gameObject.transform.position;
+            current_node.rotation = gameObject.transform.rotation;
+
+            current_node.time = Time.time - start_time;
+
+            saved_data_temp.AddNodeToPath(current_node);
 
             //yield on a new YieldInstruction that waits for 5 seconds.
-           
-         //yield return new WaitForSeconds(save_frequency);
- 
-         //PathNode current_node = new PathNode();
+            yield return new WaitForSeconds(save_frequency);
 
+            saved_data_temp.AddNodeToPath(current_node);
 
-         //           //Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-
-         //current_node.position = gameObject.transform.position;
-         //current_node.rotation = gameObject.transform.rotation;
-
-         //current_node.time = Time.time - start_time;
-
-         //   saved_data_temp.AddNodeToPath(current_node);
-
-         //   //yield on a new YieldInstruction that waits for 5 seconds.
-         //   yield return new WaitForSeconds(save_frequency);
-
-         //saved_data_temp.AddNodeToPath(current_node);
-           
 
         }
     }

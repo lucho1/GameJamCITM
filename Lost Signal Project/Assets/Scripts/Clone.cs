@@ -47,26 +47,20 @@ public class Clone : MonoBehaviour
 
             //Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
-
-
-            ////PathNode node = player_data.saved_data_temp.GetNode(0);
-            //Vector3 lastNode = player_data.saved_data_temp.GetNode(next_goal_index).position;
-            ////Vector3 nextNode = player_data.saved_data_temp.GetNode(next_goal_index).position; ;
-            ////if (player_data.saved_data_temp.GetNode(next_goal_index+1).position!=null)
-            ////    nextNode = player_data.saved_data_temp.GetNode(next_goal_index+1).position;
+            Vector3 lastNode = data.GetNode(next_goal_index).position;
+            Vector3 nextNode = data.GetNode(next_goal_index + 1).position;
+            Vector3 nextNode2 = data.GetNode(next_goal_index + 2).position;
 
 
             //float fracComplete = (Time.time - startTime) / 1;
 
-            //gameObject.transform.position = lastNode; //Vector3.Slerp(lastNode, nextNode, fracComplete);
+            gameObject.transform.position = lastNode; //Vector3.Slerp(lastNode, nextNode, fracComplete);
 
-
-            ////gameObject.transform.position = player_data.saved_data_temp.GetNode(next_goal_index).position;
-            //next_goal_index++;
+            next_goal_index++;
 
             //yield on a new YieldInstruction that waits for 5 seconds.
 
-            transform.position += transform.forward * 3;
+            
             yield return new WaitForSeconds(1);  //Should be equal to player safe frequency
 
         }

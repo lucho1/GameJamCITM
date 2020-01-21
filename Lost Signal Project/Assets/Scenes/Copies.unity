@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8e1c170450beb498952562a76eaebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  save_frequency: 1
+  save_frequency: 0.2
 --- !u!65 &2101007694
 BoxCollider:
   m_ObjectHideFlags: 0
