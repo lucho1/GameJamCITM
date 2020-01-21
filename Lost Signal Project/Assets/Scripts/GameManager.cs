@@ -4,20 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
-
-    public static GameManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<GameManager>();
-            }
-
-            return _instance;
-        }
-    }
+    public GameObject player_1;
+    public GameObject player_2;
 
     // Start is called before the first frame update
     void Start()
@@ -30,5 +18,8 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public GameObject GetPlayerOne() { return player_1; }
+    public GameObject GetPlayerTwo() { return player_2; }
 }
 
