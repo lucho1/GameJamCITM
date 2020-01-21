@@ -49,8 +49,8 @@ public class PlayerDataController : MonoBehaviour
 
     public CloneData saved_data_temp;
 
-    RoundManager rm;
 
+    RoundManager rm;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +67,7 @@ public class PlayerDataController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     IEnumerator UpdateSavedDataPath()
@@ -76,23 +76,31 @@ public class PlayerDataController : MonoBehaviour
         while (true)
         {
             //Print the time of when the function is first called.
-            Debug.Log("Started Coroutine A at timestamp : " + Time.time);
 
-
-
-            PathNode current_node = new PathNode();
-
-            //Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-
-            current_node.position = gameObject.transform.position;
-            current_node.rotation = gameObject.transform.rotation;
-            
-            current_node.time = Time.time - start_time;           
-
-            saved_data_temp.AddNodeToPath(current_node);
+            //Debug.Log("Started Coroutine at timestamp : " + Time.time);
 
             //yield on a new YieldInstruction that waits for 5 seconds.
-            yield return new WaitForSeconds(save_frequency);
+           
+         //yield return new WaitForSeconds(save_frequency);
+ 
+         //PathNode current_node = new PathNode();
+
+
+         //           //Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+
+         //current_node.position = gameObject.transform.position;
+         //current_node.rotation = gameObject.transform.rotation;
+
+         //current_node.time = Time.time - start_time;
+
+         //   saved_data_temp.AddNodeToPath(current_node);
+
+         //   //yield on a new YieldInstruction that waits for 5 seconds.
+         //   yield return new WaitForSeconds(save_frequency);
+
+         //saved_data_temp.AddNodeToPath(current_node);
+           
+
         }
     }
 

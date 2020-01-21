@@ -44,7 +44,9 @@ public class Clone : MonoBehaviour
         while (true)
         {
             //Print the time of when the function is first called.
+
             //Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
 
 
             ////PathNode node = player_data.saved_data_temp.GetNode(0);
