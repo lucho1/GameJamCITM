@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
             finalAngle += Mathf.PI;
         
 
-        Debug.Log(finalAngle * 180/Mathf.PI);
+        //Debug.Log(finalAngle * 180/Mathf.PI);
 
 
         //Vector3 rotation = new Vector3(0, Input.GetAxis("Fire1") * rotationSpeed,0);
