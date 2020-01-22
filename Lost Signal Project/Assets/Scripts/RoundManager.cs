@@ -21,6 +21,8 @@ public class RoundManager : MonoBehaviour
     float life_time;
     float current_lifetime;
 
+    public float last_round_start_timestamp;
+
     public UnityEvent OnRoundEndEvent;
 
     public UnityEvent OnRoundStartEvent;
@@ -38,6 +40,8 @@ public class RoundManager : MonoBehaviour
 
         if (OnRoundStartEvent == null)
             OnRoundStartEvent = new UnityEvent();
+
+        last_round_start_timestamp = Time.time;
     }
 
     // Update is called once per frame
@@ -67,6 +71,7 @@ public class RoundManager : MonoBehaviour
             
 
         OnRoundEndEvent.Invoke();
+        last_round_start_timestamp = Time.time;
         OnRoundStartEvent.Invoke();
     }
 

@@ -14,6 +14,8 @@ public struct CloneData
 {
     public List<PathNode> path;
 
+    public List<float> shot_time_stamps;
+
     public int round_to_reproduce;
 
     public void AddNodeToPath(PathNode n)
@@ -22,6 +24,14 @@ public struct CloneData
             path = new List<PathNode>();
 
         path.Add(n);
+    }
+
+    public void AddShotTimeStamp(float new_timestamp)
+    {
+        if (shot_time_stamps == null)
+            shot_time_stamps = new List<float>();
+
+        shot_time_stamps.Add(new_timestamp);
     }
 
     public PathNode GetNode(int i)
@@ -40,6 +50,12 @@ public struct CloneData
         path.Clear();
     }
 
+    public void ResetShotTimesList()
+    {
+        if (shot_time_stamps != null)
+        shot_time_stamps.Clear();
+    }
+
     public CloneData GetCopy()
     {
         CloneData copy = new CloneData();
@@ -49,6 +65,17 @@ public struct CloneData
         {
             copy.path.Add(node);
         }
+
+        copy.shot_time_stamps = new List<float>();
+
+        if (shot_time_stamps != null)
+        {
+            foreach (float time in shot_time_stamps)
+            {
+                copy.shot_time_stamps.Add(time);
+            }
+        }
+
 
         copy.round_to_reproduce = round_to_reproduce;
         return copy;
@@ -130,6 +157,7 @@ public class PlayerDataController : MonoBehaviour
     void OnRoundStart()
     {
         saved_data_temp.ResetPathList();
+        saved_data_temp.ResetShotTimesList();
     }
 
 }

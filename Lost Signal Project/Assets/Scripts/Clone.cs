@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Clone : MonoBehaviour
 {
-
+    public GameObject bullet_prefav; 
     PathNode goal;
     GameManager gm;
 
@@ -19,8 +19,11 @@ public class Clone : MonoBehaviour
 
     private float last_goal_change;
 
+    int shots_fired = 0;
 
     PathNode last_node;
+
+    public  int player_to_copy = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,7 @@ public class Clone : MonoBehaviour
 
         last_node.position = data.GetNode(next_goal_index).position;
         last_node.rotation = Quaternion.identity;
+
     }
 
     // Update is called once per frame
@@ -40,8 +44,24 @@ public class Clone : MonoBehaviour
             first_update = false;
 
             StartCoroutine(GoToGoal());
+
+            startTime = Time.time;
         }
 
+        for (int i = 0; i < data.shot_time_stamps.Count; i++)
+        {
+            if (Time.time - startTime >= data.shot_time_stamps[i])
+            {
+                if (shots_fired <= i) {
+                    if (player_to_copy == 1)
+                        Instantiate(bullet_prefav, transform.position, transform.rotation).layer = gm.GetPlayerOne().layer;
+                    if (player_to_copy == 2)
+                        Instantiate(bullet_prefav, transform.position, transform.rotation).layer = gm.GetPlayerTwo().layer;
+
+                    shots_fired++;
+                }
+            }
+        }
        
          float fraction_of_time_passed = (Time.time - last_goal_change) / 0.3f;
 
