@@ -59,13 +59,27 @@ public class Clone : MonoBehaviour
             if (Time.time - startTime >= data.shot_time_stamps[i].shot_time_stamp)
             {
                 if (shots_fired <= i) {
+                    Transform fire_position_transform = null;
+
+                    foreach (Transform t in gameObject.transform)
+                    {
+                        if (t.tag == "FirePosition")
+                        {
+                            fire_position_transform = t;
+                        }
+                    }
+
+                    Vector3 fire_position = new Vector3(fire_position_transform.position.x, fire_position_transform.position.y, fire_position_transform.position.z);
+
+
+
                     if (player_to_copy == 1)
                     {
-                        Instantiate(bullet_prefav, transform.position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerOne().layer;
+                        Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerOne().layer;
                     }
                     if (player_to_copy == 2)
                     {
-                        Instantiate(bullet_prefav, transform.position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerTwo().layer;
+                        Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerTwo().layer;
                     }
                     Audiosrc.clip = shootFX;
                     Audiosrc.Play();
