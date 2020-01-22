@@ -17,6 +17,11 @@ public class Clone : MonoBehaviour
 
     private float startTime;
 
+    private float last_goal_change;
+
+
+    PathNode last_node;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +29,8 @@ public class Clone : MonoBehaviour
 
         startTime = Time.time;
 
+        last_node.position = Vector3.zero;
+        last_node.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame
@@ -34,12 +41,18 @@ public class Clone : MonoBehaviour
 
             StartCoroutine(GoToGoal());
         }
+
+       
+         float fraction_of_time_passed = (Time.time - last_goal_change) / 0.3f;
+
+         gameObject.transform.position = /*nextNode;*/ Vector3.Slerp(last_node.position, goal.position, fraction_of_time_passed);
+         //Debug.Log("pos:" + gameObject.transform.position);
+        
+        
     }
 
     IEnumerator GoToGoal()
     {
-        float start_time = Time.time;
-
 
 
         while (true)
@@ -50,23 +63,20 @@ public class Clone : MonoBehaviour
 
             next_goal_index++;
 
-            Vector3 nextNode;
-
             if (next_goal_index < data.path.Count)
             {
-                nextNode = data.GetNode(next_goal_index).position;
-
-
-                //float fracComplete = (Time.time - startTime) / 1;
-
-                gameObject.transform.position = nextNode; //Vector3.Slerp(lastNode, nextNode, fracComplete);
+                Debug.Log("SwitchGoal");
+                goal = data.GetNode(next_goal_index);
+                last_goal_change = Time.time;
             }
             else
                 break;
 
 
             
-            yield return new WaitForSeconds(0.1f);  //Should be equal to player safe frequency
+            yield return new WaitForSeconds(0.3f);  //Should be equal to player safe frequency
+
+            last_node = goal;
 
         }
 

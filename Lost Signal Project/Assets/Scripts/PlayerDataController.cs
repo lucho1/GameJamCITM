@@ -57,7 +57,7 @@ public struct CloneData
 
 public class PlayerDataController : MonoBehaviour
 {
-    public float save_frequency;
+    float save_frequency = 0.3f;
 
     public CloneData saved_data_temp;
 
@@ -112,10 +112,6 @@ public class PlayerDataController : MonoBehaviour
 
             //yield on a new YieldInstruction that waits for 5 seconds.
             yield return new WaitForSeconds(save_frequency);
-
-           
-
-            saved_data_temp.AddNodeToPath(current_node);
 
 
         }
