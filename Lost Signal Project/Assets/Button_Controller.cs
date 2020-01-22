@@ -42,13 +42,13 @@ public class Button_Controller : MonoBehaviour
                 PlayerOneLabel.SetActive(true);
                 JoysticStart1 = true;
             }
-            //if (Input.GetButtonDown("StartButton2"))
-            //{
-            //    AuSRC.Play();
-            //    anim.Play();
-            //    PlayerTwoLabel.SetActive(true);
-            //    JoysticStart2 = true;
-            //}
+            if (Input.GetButtonDown("joyStartplayer2"))
+            {
+                AuSRC.Play();
+                anim.Play();
+                PlayerTwoLabel.SetActive(true);
+                JoysticStart2 = true;
+            }
         }
         if (JoysticStart1 && JoysticStart2)
         {

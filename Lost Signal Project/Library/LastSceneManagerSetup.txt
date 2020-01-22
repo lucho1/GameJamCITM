@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Video_Intro.unity
+- path: Assets/Scenes/GoodMainMenu.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

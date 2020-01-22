@@ -172,17 +172,17 @@ InputManager:
     negativeButton: 
     positiveButton: joystick button 7
     altNegativeButton: 
-    altPositiveButton: mouse 2
+    altPositiveButton: mouse 1
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
     snap: 0
     invert: 0
     type: 0
-    axis: 8
+    axis: 6
     joyNum: 1
   - serializedVersion: 3
-    m_Name: StartButton2
+    m_Name: joyStartplayer2
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -195,7 +195,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 8
+    axis: 6
     joyNum: 2
   - serializedVersion: 3
     m_Name: BButton
