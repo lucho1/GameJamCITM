@@ -65,6 +65,7 @@ public class ClonesController : MonoBehaviour
 
             clone_go.GetComponent<Clone>().data = clone_data.GetCopy();
             clone_go.GetComponent<Clone>().player_to_copy = 1;
+            clone_go.layer = 8;
 
             //for(int i = 0;i< clone_data.path.Count; i++)
             //{
@@ -80,6 +81,7 @@ public class ClonesController : MonoBehaviour
 
             clone_go.GetComponent<Clone>().data = clone_data.GetCopy();
             clone_go.GetComponent<Clone>().player_to_copy = 2;
+            clone_go.layer = 9;
 
             //for (int i = 0; i < clone_data.path.Count; i++)
             //{
