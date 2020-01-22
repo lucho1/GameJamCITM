@@ -46,6 +46,8 @@ public class WeaponController : MonoBehaviour
 
             GameObject newBullet = Instantiate(bullet_prefav, fire_position, transform.rotation);
             newBullet.layer = layer;
+
+            gameObject.GetComponent<PlayerDataController>().saved_data_temp.AddShotTimeStamp(Time.time - FindObjectOfType<RoundManager>().last_round_start_timestamp); ;
         }
     }
 }

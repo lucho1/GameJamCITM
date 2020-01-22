@@ -41,6 +41,7 @@ public class ClonesController : MonoBehaviour
         GameObject p1 = gm.GetPlayerOne();
         PlayerDataController p1_dc = p1.GetComponent<PlayerDataController>();
         CloneData p1_data = p1_dc.GetCloneData();
+
         CloneData p2_data = gm.GetPlayerTwo().GetComponent<PlayerDataController>().GetCloneData();
 
         player_one_clones_data.Add(p1_data.GetCopy());
@@ -63,12 +64,13 @@ public class ClonesController : MonoBehaviour
             GameObject clone_go = Instantiate(player_one_clone_prefab, gm.GetPlayerOne().GetComponent<PlayerController>().transform.position, Quaternion.identity);
 
             clone_go.GetComponent<Clone>().data = clone_data.GetCopy();
+            clone_go.GetComponent<Clone>().player_to_copy = 1;
 
-            for(int i = 0;i< clone_data.path.Count; i++)
-            {
-                GameObject sphere = Instantiate(DebugPathSphere, clone_data.path[i].position, clone_data.path[i].rotation);
-               // sphere.transform.position = clone_data.path[i].position;
-            }
+            //for(int i = 0;i< clone_data.path.Count; i++)
+            //{
+            //    GameObject sphere = Instantiate(DebugPathSphere, clone_data.path[i].position, clone_data.path[i].rotation);
+            //   // sphere.transform.position = clone_data.path[i].position;
+            //}
 
         }
 
@@ -77,12 +79,13 @@ public class ClonesController : MonoBehaviour
             GameObject clone_go = Instantiate(player_two_clone_prefab, gm.GetPlayerTwo().GetComponent<PlayerController>().transform.position, Quaternion.identity);
 
             clone_go.GetComponent<Clone>().data = clone_data.GetCopy();
+            clone_go.GetComponent<Clone>().player_to_copy = 2;
 
-            for (int i = 0; i < clone_data.path.Count; i++)
-            {
-                GameObject sphere = Instantiate(DebugPathSphere, clone_data.path[i].position, clone_data.path[i].rotation);
-                // sphere.transform.position = clone_data.path[i].position;
-            }
+            //for (int i = 0; i < clone_data.path.Count; i++)
+            //{
+            //    GameObject sphere = Instantiate(DebugPathSphere, clone_data.path[i].position, clone_data.path[i].rotation);
+            //    // sphere.transform.position = clone_data.path[i].position;
+            //}
 
         }
 
