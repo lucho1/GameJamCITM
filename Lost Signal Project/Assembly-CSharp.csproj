@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\WeaponController.cs" />
      <Compile Include="Assets\UI\Scripts\InGameMenu.cs" />
      <Compile Include="Assets\UI\Scripts\MainMenuManager.cs" />
+     <Compile Include="Assets\UI\Scripts\XButton.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/joanm/Documents/GitHub/Last_Resort_Syncore/GameJamCITM/Lost Signal Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

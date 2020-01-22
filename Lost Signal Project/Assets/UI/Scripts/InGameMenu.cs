@@ -13,8 +13,13 @@ public class InGameMenu : MonoBehaviour
     {
         menuEnabled = IngameMenu.active;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("StartButton"))
         {
+            if (menuEnabled)
+                ResumeGame();
+            else
+                PauseGame();
+
             IngameMenu.SetActive(!menuEnabled);
         }
     }
@@ -32,5 +37,15 @@ public class InGameMenu : MonoBehaviour
     public void ResetScene()
     {
         SceneManager.LoadScene("Blocking_Scene");
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale= 0.00f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale =1.00f;
     }
 }

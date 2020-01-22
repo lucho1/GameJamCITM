@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0.0f)
+            return;
         //Calculate new position 
         Vector3 desiredSpeed = new Vector3(Input.GetAxis(leftInputX) * maxMovementSpeed, 0,Input.GetAxis(leftInputY) * maxMovementSpeed);
         currMovementSpeed += (desiredSpeed - currMovementSpeed) * movementAcceleration;
