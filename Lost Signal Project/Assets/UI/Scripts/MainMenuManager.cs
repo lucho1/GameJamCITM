@@ -8,7 +8,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Blocking_Scene");
+        SceneManager.LoadScene("Scenario");
     }
 
    public void ExitGame()
