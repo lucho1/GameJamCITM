@@ -9,12 +9,13 @@ public class BulletController : MonoBehaviour
     public SphereCollider collider;
 
     GameObject GameController;
-
+    GameManager gm;
 
     // Start is called before the first frame update
     void Start()
     {
         GameController = GameObject.Find("GameController");
+        gm = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -32,23 +33,17 @@ public class BulletController : MonoBehaviour
 
         if(other.tag == "Clone")
         {
-            int a = 212;
-            a++;
             Destroy(other.gameObject);
         }
         if(other.gameObject.tag == "Player")
         {
             if(other.gameObject.name == "Player1")
             {
-                int a=0;
-                a++;
-                //TODO 
+                gm.Player1Kills++;
             }
             else
             {
-                int b=0;
-                b++;
-                //stuff
+                gm.Player2Kills++;
             }
 
             GameController.GetComponent<RoundManager>().GoToNextRound();
