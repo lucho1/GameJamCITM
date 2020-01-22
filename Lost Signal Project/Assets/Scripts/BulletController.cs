@@ -5,10 +5,11 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float speed;
+
+    public SphereCollider collider;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -18,5 +19,10 @@ public class BulletController : MonoBehaviour
             this.transform.position + this.transform.forward * speed * Time.deltaTime, 
             transform.rotation
         );
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 }

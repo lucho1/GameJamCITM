@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2029165941108852847}
   - component: {fileID: 2029165941108852846}
   - component: {fileID: 2029165941108852841}
+  - component: {fileID: 8881724091764457351}
   - component: {fileID: 215423188156645934}
   m_Layer: 0
   m_Name: Player
@@ -140,6 +141,7 @@ MonoBehaviour:
   bullet_prefav: {fileID: 8445029030044029742, guid: 63aaea5a4ea00b64bbc42208708a3a50,
     type: 3}
   controllerNumber: 2
+  layer: 0
 --- !u!114 &2029165941108852841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +154,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c26b5dae987b13742a7333165bcd3326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8881724091764457351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029165941108852849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1272d50ff8f92240ab0bd8521b5857d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingTime: 0
 --- !u!54 &215423188156645934
 Rigidbody:
   m_ObjectHideFlags: 0

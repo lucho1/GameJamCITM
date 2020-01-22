@@ -10,6 +10,8 @@ public struct WeaponStats
 public class WeaponController : MonoBehaviour
 {
     public GameObject bullet_prefav;
+    private Timer weaponShotTime;
+    public float fireRate = 1.0f;
 
     [Range (1,2)]public int controllerNumber;
 
@@ -17,21 +19,27 @@ public class WeaponController : MonoBehaviour
 
     WeaponStats current_weapon_stats;
 
+    public int layer;
+
     // Start is called before the first frame update
     void Start()
     {
         fireButton = "FireButton" + controllerNumber.ToString();
+        weaponShotTime = gameObject.GetComponent<Timer>();
+        weaponShotTime.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown(fireButton))
+        if (Input.GetAxis(fireButton) > 0 && weaponShotTime.ReadTime() > fireRate)
         {
+            weaponShotTime.Start();
             Vector3 fire_position = transform.position;
             fire_position += transform.forward * 1;
 
-            Instantiate(bullet_prefav, fire_position, transform.rotation);
+            GameObject newBullet = Instantiate(bullet_prefav, fire_position, transform.rotation);
+            newBullet.layer = layer;
         }
     }
 }
