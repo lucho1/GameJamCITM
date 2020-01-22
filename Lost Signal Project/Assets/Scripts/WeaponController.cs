@@ -9,6 +9,7 @@ public struct WeaponStats
 
 public class WeaponController : MonoBehaviour
 {
+    public GameObject firePositionGO;
     public GameObject bullet_prefav;
     private Timer weaponShotTime;
     public float fireRate = 1.0f;
@@ -52,7 +53,7 @@ public class WeaponController : MonoBehaviour
                 }
             }
 
-            Vector3 fire_position = new Vector3(fire_position_transform.position.x, fire_position_transform.position.y, fire_position_transform.position.z);
+            Vector3 fire_position = firePositionGO.transform.position;
 
 
             GameObject newBullet = Instantiate(bullet_prefav, fire_position, transform.rotation);

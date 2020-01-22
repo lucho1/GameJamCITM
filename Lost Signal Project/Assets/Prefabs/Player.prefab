@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3106ef722493534f837e946c9e289e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePositionGO: {fileID: 4051068080594742104}
   bullet_prefav: {fileID: 8445029030044029742, guid: 63aaea5a4ea00b64bbc42208708a3a50,
     type: 3}
   fireRate: 0.4
@@ -444,11 +445,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2029165941108852844}
     m_Modifications:
-    - target: {fileID: 458709806067015838, guid: db5d3f70a8c5ccf43b157c19b75eb651,
-        type: 3}
-      propertyPath: m_Name
-      value: Character
-      objectReference: {fileID: 0}
     - target: {fileID: 3460721625359061645, guid: db5d3f70a8c5ccf43b157c19b75eb651,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -518,6 +514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.3491742
+      objectReference: {fileID: 0}
+    - target: {fileID: 458709806067015838, guid: db5d3f70a8c5ccf43b157c19b75eb651,
+        type: 3}
+      propertyPath: m_Name
+      value: Character
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db5d3f70a8c5ccf43b157c19b75eb651, type: 3}
