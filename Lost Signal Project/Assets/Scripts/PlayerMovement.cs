@@ -16,10 +16,14 @@ public class PlayerMovement : MonoBehaviour
     private string leftInputX, leftInputY;
     private string rightInputX, rightInputY;
 
+    Animator animator;
+
     void Start()
     {
         leftInputX = "LeftStickVertical" + controllerNumber.ToString();
         leftInputY = "LeftStickHorizontal" + controllerNumber.ToString();
+
+        animator = gameObject.GetComponentInChildren<Animator>();
 
         rightInputX = "RightStickHorizontal" + controllerNumber.ToString();
         rightInputY = "RightStickVertical" + controllerNumber.ToString();
@@ -31,35 +35,62 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.timeScale == 0.0f)
             return;
+
+        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         //Calculate new position 
-        Vector3 desiredSpeed = new Vector3(Input.GetAxis(leftInputX) * maxMovementSpeed, 0,Input.GetAxis(leftInputY) * maxMovementSpeed);
+        Vector3 desiredSpeed = new Vector3(Input.GetAxis(leftInputX) * maxMovementSpeed, 0, Input.GetAxis(leftInputY) * maxMovementSpeed);
         currMovementSpeed += (desiredSpeed - currMovementSpeed) * movementAcceleration;
 
-        float inputX = Input.GetAxis(rightInputX);
-        float inputY = Input.GetAxis(rightInputY);
-        
-        //Update rotations
-        if (inputY != 0 && inputX != 0)
+        transform.position += currMovementSpeed * Time.deltaTime;
+        rb.MoveRotation(Quaternion.LookRotation(currMovementSpeed.normalized,Vector3.up));
+
+        if (desiredSpeed != Vector3.zero)
         {
-            //Angle we want
-            float finalAngle = Mathf.Atan(inputY / inputX);
-
-            //Adjust angle depending on its quadrant
-            if (inputX < 0 || inputY < 0)
-                finalAngle += Mathf.PI;
-
-            if (inputX >= 0 && inputY < 0)
-                finalAngle += Mathf.PI;
-
-            float currentAngle = transform.rotation.y;
-
-            float newAngle = currentAngle + (currRotationSpeed * Time.deltaTime);
-
-            //Update position &
-            transform.rotation = Quaternion.Euler(0, -finalAngle * 180 / Mathf.PI, 0);
+            animator.SetBool("Running", true);
         }
+        else
+            animator.SetBool("Running", false);
 
-        transform.position += currMovementSpeed*Time.deltaTime;
+
+        ////////////
+
+
+        //Debug.Log("Direction:");
+        //Debug.Log(direction.z);
+
+        //transform.position += transform.forward * -direction.normalized * maxMovementSpeed * Time.deltaTime;
+
+        //transform.Rotate(new Vector3(0, 1, 0), direction.x * 2);
+
+        ///////////////
+
+        //float inputX = Input.GetAxis(leftInputX);
+        //float inputY = Input.GetAxis(leftInputY);
+
+        ////Update rotations
+        //if (inputY != 0 && inputX != 0)
+        //{
+        //    //Angle we want
+        //    float finalAngle = Mathf.Atan(inputY / inputX);
+
+        //    //Adjust angle depending on its quadrant
+        //    if (inputX < 0 || inputY < 0)
+        //        finalAngle += Mathf.PI;
+
+        //    if (inputX >= 0 && inputY < 0)
+        //        finalAngle += Mathf.PI;
+
+        //    float currentAngle = transform.rotation.y;
+
+        //    float newAngle = currentAngle + (currRotationSpeed * Time.deltaTime);
+
+        //    //Update position &
+        //    transform.rotation = Quaternion.Euler(0, -finalAngle * 180 / Mathf.PI, 0);
+
+
+        //}
+
+
     }
     
 }
