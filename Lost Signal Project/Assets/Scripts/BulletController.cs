@@ -7,9 +7,14 @@ public class BulletController : MonoBehaviour
     public float speed;
 
     public SphereCollider collider;
+
+    GameObject GameController;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        GameController = GameObject.Find("GameController");
     }
 
     // Update is called once per frame
@@ -23,6 +28,11 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag == "Player")
+        {
+            GameController.GetComponent<RoundManager>().GoToNextRound();
+        }
+
         Destroy(gameObject);
     }
 }

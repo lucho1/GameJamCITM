@@ -60,10 +60,11 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    void GoToNextRound()
+    public void GoToNextRound()
     {
         current_round++;
-
+         if(!GameObject.Find("Player1"))
+            
 
         OnRoundEndEvent.Invoke();
         OnRoundStartEvent.Invoke();
