@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject player_2;
     public GameObject StartingMusic;
 
+    public int Player1Kills = 0;
+    public int Player2Kills = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Player1Kills > 3)
+        {
+            int a = 1;
+        }
+        if (Player2Kills > 3)
+        {
+            int a = 1;
+        }
     }
 
     public GameObject GetPlayerOne() { return player_1; }

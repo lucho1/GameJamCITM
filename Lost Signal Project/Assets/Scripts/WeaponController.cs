@@ -41,13 +41,24 @@ public class WeaponController : MonoBehaviour
             Audiosrc.Play();
 
             weaponShotTime.Start();
-            Vector3 fire_position = transform.position;
-            fire_position += transform.forward * 1;
+
+            Transform fire_position_transform = null;
+
+            foreach (Transform t in gameObject.transform)
+            {
+                if (t.tag == "FirePosition")
+                {
+                    fire_position_transform = t;
+                }
+            }
+
+            Vector3 fire_position = new Vector3(fire_position_transform.position.x, fire_position_transform.position.y, fire_position_transform.position.z);
+
 
             GameObject newBullet = Instantiate(bullet_prefav, fire_position, transform.rotation);
             newBullet.layer = layer;
 
-            gameObject.GetComponent<PlayerDataController>().saved_data_temp.AddShotTimeStamp(Time.time - FindObjectOfType<RoundManager>().last_round_start_timestamp); ;
+            gameObject.GetComponent<PlayerDataController>().saved_data_temp.AddShotTimeStamp(Time.time - FindObjectOfType<RoundManager>().last_round_start_timestamp,this.gameObject); ;
         }
     }
 }

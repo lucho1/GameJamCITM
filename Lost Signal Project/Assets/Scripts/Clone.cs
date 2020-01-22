@@ -25,6 +25,9 @@ public class Clone : MonoBehaviour
 
     public  int player_to_copy = 0;
 
+    public AudioClip shootFX;
+    private AudioSource Audiosrc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,8 @@ public class Clone : MonoBehaviour
 
         last_node.position = data.GetNode(next_goal_index).position;
         last_node.rotation = Quaternion.identity;
+
+        Audiosrc = GetComponent<AudioSource>();
 
     }
 
@@ -48,27 +53,51 @@ public class Clone : MonoBehaviour
             startTime = Time.time;
         }
 
+        //Manage shots
         for (int i = 0; i < data.shot_time_stamps.Count; i++)
         {
-            if (Time.time - startTime >= data.shot_time_stamps[i])
+            if (Time.time - startTime >= data.shot_time_stamps[i].shot_time_stamp)
             {
                 if (shots_fired <= i) {
-                    if (player_to_copy == 1)
-                        Instantiate(bullet_prefav, transform.position, transform.rotation).layer = gm.GetPlayerOne().layer;
-                    if (player_to_copy == 2)
-                        Instantiate(bullet_prefav, transform.position, transform.rotation).layer = gm.GetPlayerTwo().layer;
+                    Transform fire_position_transform = null;
 
+                    foreach (Transform t in gameObject.transform)
+                    {
+                        if (t.tag == "FirePosition")
+                        {
+                            fire_position_transform = t;
+                        }
+                    }
+
+                    Vector3 fire_position = new Vector3(fire_position_transform.position.x, fire_position_transform.position.y, fire_position_transform.position.z);
+
+
+
+                    if (player_to_copy == 1)
+                    {
+                        GameObject newBullet = Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation);
+                           newBullet.layer = 10;
+                    }
+                    if (player_to_copy == 2)
+                    {
+                        GameObject newBullet = Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation);
+                        newBullet.layer = 11;
+                    }
+                    Audiosrc.clip = shootFX;
+                    Audiosrc.Play();
                     shots_fired++;
                 }
             }
         }
        
+
          float fraction_of_time_passed = (Time.time - last_goal_change) / 0.3f;
 
          gameObject.transform.position = /*nextNode;*/ Vector3.Slerp(last_node.position, goal.position, fraction_of_time_passed);
-         //Debug.Log("pos:" + gameObject.transform.position);
-        
-        
+         gameObject.transform.rotation = Quaternion.Slerp(last_node.rotation, goal.rotation, fraction_of_time_passed);
+        //Debug.Log("pos:" + gameObject.transform.position);
+
+
     }
 
     IEnumerator GoToGoal()
