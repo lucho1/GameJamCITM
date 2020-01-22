@@ -75,11 +75,13 @@ public class Clone : MonoBehaviour
 
                     if (player_to_copy == 1)
                     {
-                        Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerOne().layer;
+                        GameObject newBullet = Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation);
+                           newBullet.layer = 10;
                     }
                     if (player_to_copy == 2)
                     {
-                        Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerTwo().layer;
+                        GameObject newBullet = Instantiate(bullet_prefav, fire_position, data.shot_time_stamps[i].rotation);
+                        newBullet.layer = 11;
                     }
                     Audiosrc.clip = shootFX;
                     Audiosrc.Play();

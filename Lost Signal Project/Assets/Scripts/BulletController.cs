@@ -28,9 +28,35 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+
+        if(other.tag == "Clone")
+        {
+            int a = 212;
+            a++;
+            Destroy(other.gameObject);
+        }
         if(other.gameObject.tag == "Player")
         {
+            if(other.gameObject.name == "Player1")
+            {
+                int a=0;
+                a++;
+                //TODO 
+            }
+            else
+            {
+                int b=0;
+                b++;
+                //stuff
+            }
+
             GameController.GetComponent<RoundManager>().GoToNextRound();
+        }
+
+        if(gameObject.tag == "clone")
+        {
+
         }
 
         Destroy(gameObject);
