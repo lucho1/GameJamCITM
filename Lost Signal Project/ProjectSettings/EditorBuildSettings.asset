@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Blocking_Scene.unity
     guid: 2f36b2609fe04c940923731461fc6af2
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 3ae6c4aa4666741439cc105196c53a02
   m_configObjects: {}
