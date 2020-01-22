@@ -10,11 +10,17 @@ public struct PathNode
     public float time;
 }
 
+public struct ShotInfo
+{
+    public float shot_time_stamp;
+    public Quaternion rotation;
+}
+
 public struct CloneData
 {
     public List<PathNode> path;
 
-    public List<float> shot_time_stamps;
+    public List<ShotInfo> shot_time_stamps;
 
     public int round_to_reproduce;
 
@@ -26,12 +32,16 @@ public struct CloneData
         path.Add(n);
     }
 
-    public void AddShotTimeStamp(float new_timestamp)
+    public void AddShotTimeStamp(float new_timestamp,GameObject emmiter)
     {
         if (shot_time_stamps == null)
-            shot_time_stamps = new List<float>();
+            shot_time_stamps = new List<ShotInfo>();
 
-        shot_time_stamps.Add(new_timestamp);
+        ShotInfo new_shot_info = new ShotInfo();
+        new_shot_info.shot_time_stamp = new_timestamp;
+        new_shot_info.rotation = emmiter.transform.rotation;
+
+        shot_time_stamps.Add(new_shot_info);
     }
 
     public PathNode GetNode(int i)
@@ -66,13 +76,13 @@ public struct CloneData
             copy.path.Add(node);
         }
 
-        copy.shot_time_stamps = new List<float>();
+        copy.shot_time_stamps = new List<ShotInfo>();
 
         if (shot_time_stamps != null)
         {
-            foreach (float time in shot_time_stamps)
+            foreach (ShotInfo shot_info in shot_time_stamps)
             {
-                copy.shot_time_stamps.Add(time);
+                copy.shot_time_stamps.Add(shot_info);
             }
         }
 

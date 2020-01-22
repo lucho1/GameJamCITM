@@ -25,6 +25,9 @@ public class Clone : MonoBehaviour
 
     public  int player_to_copy = 0;
 
+    public AudioClip shootFX;
+    private AudioSource Audiosrc;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,8 @@ public class Clone : MonoBehaviour
 
         last_node.position = data.GetNode(next_goal_index).position;
         last_node.rotation = Quaternion.identity;
+
+        Audiosrc = GetComponent<AudioSource>();
 
     }
 
@@ -50,14 +55,19 @@ public class Clone : MonoBehaviour
 
         for (int i = 0; i < data.shot_time_stamps.Count; i++)
         {
-            if (Time.time - startTime >= data.shot_time_stamps[i])
+            if (Time.time - startTime >= data.shot_time_stamps[i].shot_time_stamp)
             {
                 if (shots_fired <= i) {
                     if (player_to_copy == 1)
-                        Instantiate(bullet_prefav, transform.position, transform.rotation).layer = gm.GetPlayerOne().layer;
+                    {
+                        Instantiate(bullet_prefav, transform.position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerOne().layer;
+                    }
                     if (player_to_copy == 2)
-                        Instantiate(bullet_prefav, transform.position, transform.rotation).layer = gm.GetPlayerTwo().layer;
-
+                    {
+                        Instantiate(bullet_prefav, transform.position, data.shot_time_stamps[i].rotation).layer = gm.GetPlayerTwo().layer;
+                    }
+                    Audiosrc.clip = shootFX;
+                    Audiosrc.Play();
                     shots_fired++;
                 }
             }
