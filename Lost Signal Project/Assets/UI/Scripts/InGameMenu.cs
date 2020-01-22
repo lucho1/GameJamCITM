@@ -48,4 +48,9 @@ public class InGameMenu : MonoBehaviour
     {
         Time.timeScale =1.00f;
     }
+
+    public void PlayOnClickSound()
+    {
+        GetComponentInParent<AudioSource>().Play();
+    }
 }

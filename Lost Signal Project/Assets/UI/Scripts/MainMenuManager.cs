@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+
     public void StartGame()
     {
         SceneManager.LoadScene("Blocking_Scene");
@@ -13,5 +14,10 @@ public class MainMenuManager : MonoBehaviour
    public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void PlayOnClickSound()
+    {
+        GetComponentInParent<AudioSource>().Play();
     }
 }

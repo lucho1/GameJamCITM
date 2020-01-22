@@ -6,10 +6,12 @@ public class GameManager : MonoBehaviour
 {
     public GameObject player_1;
     public GameObject player_2;
+    public GameObject StartingMusic;
 
     // Start is called before the first frame update
     void Start()
     {
+        StartingMusic.GetComponent<MusicManager>().ActivateMusic();
     }
 
     // Update is called once per frame

@@ -26,6 +26,9 @@ public class MusicManager : MonoBehaviour
 
     public void ActivateMusic()
     {
+        if(!audioSrc)
+            audioSrc = GetComponentInParent<AudioSource>();
+
         if (init != null)
         {
             audioSrc.clip = init;
