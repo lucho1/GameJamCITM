@@ -18,11 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        leftInputX = "LeftStickHorizontal"+ controllerNumber.ToString();
-        leftInputY = "LeftStickVertical" + controllerNumber.ToString();
+        leftInputX = "LeftStickVertical" + controllerNumber.ToString();
+        leftInputY = "LeftStickHorizontal" + controllerNumber.ToString();
 
-        rightInputX = "RightStickVertical" + controllerNumber.ToString();
-        rightInputY = "RightStickHorizontal" + controllerNumber.ToString();
+        rightInputX = "RightStickHorizontal" + controllerNumber.ToString();
+        rightInputY = "RightStickVertical" + controllerNumber.ToString();
 
         currMovementSpeed = new Vector3(0.0f, 0.0f, 0.0f);
     }
