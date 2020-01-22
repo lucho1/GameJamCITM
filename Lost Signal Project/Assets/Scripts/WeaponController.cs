@@ -12,6 +12,8 @@ public class WeaponController : MonoBehaviour
     public GameObject bullet_prefav;
     private Timer weaponShotTime;
     public float fireRate = 1.0f;
+    public AudioClip shootFX;
+    private AudioSource Audiosrc;
 
     [Range (1,2)]public int controllerNumber;
 
@@ -27,6 +29,7 @@ public class WeaponController : MonoBehaviour
         fireButton = "FireButton" + controllerNumber.ToString();
         weaponShotTime = gameObject.GetComponent<Timer>();
         weaponShotTime.Start();
+        Audiosrc = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -34,6 +37,9 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetAxis(fireButton) > 0 && weaponShotTime.ReadTime() > fireRate)
         {
+            Audiosrc.clip = shootFX;
+            Audiosrc.Play();
+
             weaponShotTime.Start();
             Vector3 fire_position = transform.position;
             fire_position += transform.forward * 1;

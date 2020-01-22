@@ -66,10 +66,8 @@ public class RoundManager : MonoBehaviour
 
     public void GoToNextRound()
     {
+        GameObject.Find("RewindSound").GetComponent<AudioSource>().Play();
         current_round++;
-         if(!GameObject.Find("Player1"))
-            
-
         OnRoundEndEvent.Invoke();
         last_round_start_timestamp = Time.time;
         OnRoundStartEvent.Invoke();
