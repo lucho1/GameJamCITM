@@ -22,6 +22,8 @@ public class ClonesController : MonoBehaviour
         gm = gameObject.GetComponent<GameManager>();
 
         player_one_clones_data = new List<CloneData>();
+        player_two_clones_data = new List<CloneData>();
+
 
         rm = FindObjectOfType<RoundManager>();
         rm.OnRoundEndEvent.AddListener(OnRoundEnd);
@@ -36,10 +38,14 @@ public class ClonesController : MonoBehaviour
 
     void OnRoundEnd()
     {
-        CloneData p1_data = gm.GetPlayerOne().GetComponent<PlayerDataController>().GetCloneData();
-        // Ara p2 es null CloneData p2_data = gm.GetPlayerTwo().GetComponent<PlayerDataController>().GetCloneData();
+        GameObject p1 = gm.GetPlayerOne();
+        PlayerDataController p1_dc = p1.GetComponent<PlayerDataController>();
+        CloneData p1_data = p1_dc.GetCloneData();
+        CloneData p2_data = gm.GetPlayerTwo().GetComponent<PlayerDataController>().GetCloneData();
 
         player_one_clones_data.Add(p1_data.GetCopy());
+
+        player_two_clones_data.Add(p2_data.GetCopy());
 
         Clone[] clones = FindObjectsOfType<Clone>();
         foreach (Clone clone in clones)
@@ -54,7 +60,7 @@ public class ClonesController : MonoBehaviour
         
         foreach (CloneData clone_data in player_one_clones_data)
         {
-            GameObject clone_go = Instantiate(player_one_clone_prefab, new Vector3(Random.Range(-15.0f, 15.0f), gm.GetPlayerOne().transform.position.y,0), Quaternion.identity);
+            GameObject clone_go = Instantiate(player_one_clone_prefab, gm.GetPlayerOne().GetComponent<PlayerController>().transform.position, Quaternion.identity);
 
             clone_go.GetComponent<Clone>().data = clone_data.GetCopy();
 
@@ -63,13 +69,20 @@ public class ClonesController : MonoBehaviour
                 GameObject sphere = Instantiate(DebugPathSphere, clone_data.path[i].position, clone_data.path[i].rotation);
                // sphere.transform.position = clone_data.path[i].position;
             }
-            
-            
 
-           
+        }
 
-            
-           
+        foreach (CloneData clone_data in player_two_clones_data)
+        {
+            GameObject clone_go = Instantiate(player_two_clone_prefab, gm.GetPlayerTwo().GetComponent<PlayerController>().transform.position, Quaternion.identity);
+
+            clone_go.GetComponent<Clone>().data = clone_data.GetCopy();
+
+            for (int i = 0; i < clone_data.path.Count; i++)
+            {
+                GameObject sphere = Instantiate(DebugPathSphere, clone_data.path[i].position, clone_data.path[i].rotation);
+                // sphere.transform.position = clone_data.path[i].position;
+            }
 
         }
 

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawn_position = new Vector3(0, 0, 0); //Es pot canviar
+        spawn_position = transform.position; //Es pot canviar
 
         //Afegir un event
         RoundManager rm = FindObjectOfType<RoundManager>();

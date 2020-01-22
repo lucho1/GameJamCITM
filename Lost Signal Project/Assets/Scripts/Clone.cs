@@ -13,7 +13,7 @@ public class Clone : MonoBehaviour
 
     bool first_update = true;
 
-    int next_goal_index = -1; //La corrutina comença sumant i aixi comença amb 0
+    int next_goal_index = 0; //La corrutina comença sumant i aixi comença amb 0
 
     private float startTime;
 
@@ -29,7 +29,7 @@ public class Clone : MonoBehaviour
 
         startTime = Time.time;
 
-        last_node.position = Vector3.zero;
+        last_node.position = data.GetNode(next_goal_index).position;
         last_node.rotation = Quaternion.identity;
     }
 
