@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
         rm.OnRoundEndEvent.AddListener(OnRoundEnd);
         rm.OnRoundStartEvent.AddListener(OnRoundStart);
 
-        Audiosrc = GetComponent<AudioSource>();
+      //  Audiosrc = GetComponent<AudioSource>();
+        Audiosrc = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame

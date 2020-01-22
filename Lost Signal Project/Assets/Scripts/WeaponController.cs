@@ -29,7 +29,7 @@ public class WeaponController : MonoBehaviour
         fireButton = "FireButton" + controllerNumber.ToString();
         weaponShotTime = gameObject.GetComponent<Timer>();
         weaponShotTime.Start();
-        Audiosrc = GetComponent<AudioSource>();
+        Audiosrc = GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
