@@ -53,6 +53,7 @@ public class Clone : MonoBehaviour
             startTime = Time.time;
         }
 
+        //Manage shots
         for (int i = 0; i < data.shot_time_stamps.Count; i++)
         {
             if (Time.time - startTime >= data.shot_time_stamps[i].shot_time_stamp)
@@ -73,12 +74,14 @@ public class Clone : MonoBehaviour
             }
         }
        
+
          float fraction_of_time_passed = (Time.time - last_goal_change) / 0.3f;
 
          gameObject.transform.position = /*nextNode;*/ Vector3.Slerp(last_node.position, goal.position, fraction_of_time_passed);
-         //Debug.Log("pos:" + gameObject.transform.position);
-        
-        
+         gameObject.transform.rotation = Quaternion.Slerp(last_node.rotation, goal.rotation, fraction_of_time_passed);
+        //Debug.Log("pos:" + gameObject.transform.position);
+
+
     }
 
     IEnumerator GoToGoal()
